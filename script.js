@@ -76,6 +76,14 @@ if (!tong) {
             window.open('?tell=' + compressed, '_blank').focus();
         } else if (action == 'copy') {
             navigator.clipboard.writeText(window.location.href + '?tell=' + compressed);
+
+            const formElement = e.target;
+            const copyBtn = formElement.lastElementChild;
+            copyBtn.value = 'copied';
+
+            setTimeout(() => {
+                copyBtn.value = 'copy link';
+            }, 500);
         } else {
             console.error('Not action!');
         }
