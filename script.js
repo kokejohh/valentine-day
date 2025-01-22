@@ -1,6 +1,3 @@
-const urlParams = new URLSearchParams(window.location.search);
-const tong = urlParams.get('tell')?.replaceAll(' ', '+');
-
 const imgData = {
     1: 'https://media.tenor.com/ivKWdfdbV3EAAAAi/goma-goma-cat.gif',
     2: 'https://media.tenor.com/v63_brUy45wAAAAi/peach-goma-love-peach-cat.gif',
@@ -32,19 +29,24 @@ const imgData = {
     28: 'https://media.tenor.com/VDMk4K-ZC5kAAAAj/mochipeachcat-mochi-cat.gif',
 }
 
-
 const selectGif = document.querySelector('#selectGif');
 const cover = document.querySelector('#cover');
 
 cover.src = imgData[selectGif.value];
 selectGif.addEventListener('change', e => {
+    setToGen();
     const value = e.currentTarget?.value;
     cover.src = imgData[value];
 });
 
 const inputTxts = document.querySelectorAll('input[type=text]');
+const submitBtn = document.querySelector('input[type=submit');
 
 inputTxts.forEach((inputTxt, index) => {
+    if (index === 3) return;
+    inputTxt.addEventListener('input', setToGen);
+    inputTxt.addEventListener('propertychange', setToGen); 
+
     if (index === 0) return;
     inputTxt.disabled = true;
     inputTxt.style.display = 'none';
@@ -57,64 +59,74 @@ inputTxts.forEach((inputTxt, index) => {
     });
 });
 
+const urlParams = new URLSearchParams(window.location.search);
+const tong = urlParams.get('tell')?.replaceAll(' ', '+');
 
 if (!tong) {
     const myForm = document.querySelector('#myForm');
 
-    myForm.addEventListener('submit', function (e) {
+    myForm.addEventListener('submit', e => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
+        const form = e.target;
+        const formData = new FormData(form);
         const formObj = Object.fromEntries(formData);
         const formArray = Object.values(formObj).map(data => data.trim().replaceAll(',', '-'));
         const formTxt = formArray.join(',');
 
-        let compressed = LZString.compressToBase64(formTxt);
+        const compressed = LZString.compressToBase64(formTxt);
 
         const action = e.submitter.name;
-        if (action == 'open') {
+        if (action == 'gen') {
+            const link = document.querySelector('#link');
+            link.value = window.location.href + '?tell=' + compressed;
+
+            setToOpen();
+
+        } else if (action == 'open') {
             window.open('?tell=' + compressed, '_blank').focus();
-        } else if (action == 'copy') {
-            navigator.clipboard.writeText(window.location.href + '?tell=' + compressed);
-
-            const formElement = e.target;
-            const copyBtn = formElement.lastElementChild;
-            copyBtn.value = 'copied';
-
-            setTimeout(() => {
-                copyBtn.value = 'copy link';
-            }, 500);
         } else {
             console.error('Not action!');
-        }
-    });
-
-    const plus = document.querySelector('#plus');
-    const minus = document.querySelector('#minus');
-
-    plus.addEventListener('click', async e => {
-        for (let i = 0; i < inputTxts.length; i++) {
-            if (inputTxts[i].style.display !== '') {
-                inputTxts[i].style.display = '';
-                inputTxts[i].disabled = false;
-                inputTxts[i].classList.remove('animate__bounceOut');
-                return;
-            }
-        }
-    });
-
-    minus.addEventListener('click', e => {
-        for (let i = inputTxts.length - 1; i > 0; i--) {
-            if (inputTxts[i].style.display === '') {
-                inputTxts[i].classList.add('animate__bounceOut');
-                return;
-            }
         }
     });
 
     const home = document.querySelector('#home');
     home.remove();
 
+    const plus = document.querySelector('#plus');
+    plus.addEventListener('click', async e => {
+        for (let i = 0; i < inputTxts.length - 1; i++) {
+            if (inputTxts[i].style.display !== '') {
+                inputTxts[i].style.display = '';
+                inputTxts[i].disabled = false;
+                inputTxts[i].classList.remove('animate__bounceOut');
+                setToGen();
+                return;
+            }
+        }
+    });
+
+    const minus = document.querySelector('#minus');
+    minus.addEventListener('click', e => {
+        for (let i = inputTxts.length - 2; i > 0; i--) {
+            if (inputTxts[i].style.display === '') {
+                inputTxts[i].classList.add('animate__bounceOut');
+                setToGen();
+                return;
+            }
+        }
+    });
+
+    const copy = document.querySelector('input[name=copy]');
+    copy.addEventListener('click', e => {
+        const link = document.querySelector('#link');
+        navigator.clipboard.writeText(link.value);
+
+        e.target.value = 'Copied';
+        setTimeout(() => {
+            e.target.value = 'Copy link';
+        }, 500);
+    });
 } else {
     const actionClass = document.querySelectorAll('.action');
     actionClass.forEach(element => element.remove());
@@ -130,6 +142,18 @@ if (!tong) {
         }
         cover.src = imgData[message[message.length - 1]];
     }
-
 }
 
+function setToGen() {
+    if (submitBtn) {
+        submitBtn.name = 'gen';
+        submitBtn.value = 'Generate link';
+    }
+}
+
+function setToOpen() {
+    if (submitBtn) {
+        submitBtn.name = 'open';
+        submitBtn.value = 'Open link';
+    }
+}
