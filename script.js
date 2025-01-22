@@ -148,6 +148,7 @@ function setToGen() {
     if (submitBtn) {
         submitBtn.name = 'gen';
         submitBtn.value = 'Generate link';
+        setDefaultText();
     }
 }
 
@@ -155,5 +156,12 @@ function setToOpen() {
     if (submitBtn) {
         submitBtn.name = 'open';
         submitBtn.value = 'Open link';
+    }
+}
+
+function setDefaultText() {
+    const link = document.querySelector('#link');
+    if (link) {
+        link.value = 'Generate a link to share.';
     }
 }
