@@ -15,7 +15,7 @@
 }
 
 html {
-  background-color: var(--pink-50);
+    background-image: linear-gradient(var(--pink-70), var(--pink-50));
 }
 
 body {
