@@ -1,0 +1,145 @@
+:root {
+  --pink-10: #e7cdce;
+  --pink-20: #eaa8ac;
+  --pink-50: #e1848c;
+  --pink-70: #d05d65;
+  --pink-100: #c00645;
+  --medium: 0.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Sriracha', cursive;
+}
+
+html {
+  background-color: var(--pink-50);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100svh;
+}
+
+body>*+* {
+  margin-top: var(--medium);
+}
+
+h1 {
+  font-size: 5rem;
+  color: var(--pink-10);
+  word-break: keep-all;
+}
+
+form {
+    text-align: center;
+    width: 80%;
+}
+
+input, select {
+    background-color: var(--pink-10);
+    color: var(--pink-100);
+    cursor: pointer;
+    border-radius: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    padding: 0 1.5rem;
+    margin: 0.5rem 0.25rem;
+}
+
+input[type=text] {
+    border: 2px solid var(--pink-70);
+    cursor: text;
+    padding: 0.5rem 1.5rem;
+    width: 30%;
+}
+
+input::-webkit-calendar-picker-indicator, input::-webkit-list-button {
+    display: none !important;
+}
+
+input[type=button], select {
+    font-size: 1.5rem;
+    width: 10%;
+}
+
+input[type=submit] {
+    font-size: 1.5rem;
+    width: 20%;
+    -webkit-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+}
+
+input[name=copy] {
+    background-color: var(--pink-70);
+    border: 2px solid var(--pink-100);
+    color: var(--pink-100);
+}
+
+input[name=copy]:hover {
+    border: 2px solid var(--pink-10);
+    color: var(--pink-10);
+}
+
+input[name=open] {
+    background-color: var(--pink-100);
+    border: 2px solid var(--pink-100);
+    color: var(--pink-10);
+}
+
+input[name=open]:hover {
+    background-color: var(--pink-70);
+    border: 2px solid var(--pink-10);
+    color: var(--pink-10);
+
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.animate__fastest {
+    --animate-duration: 300ms;
+}
+
+.animate__fast {
+    --animate-duration: 700ms;
+}
+
+#cover {
+    margin-bottom: 1rem;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    input[type=button] {
+        font-size: 1.5rem;
+        width: 20%;
+    }
+
+    input[type=text] {
+        margin: 0.2rem 2px;
+        width: 100%;
+    }
+
+    input[type=submit] {
+        width: 45%;
+    }
+
+    select {
+        margin: 0.2rem 2px;
+        width: 40%;
+    }
+}
