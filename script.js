@@ -112,6 +112,9 @@ if (!tong) {
         }
     });
 
+    const home = document.querySelector('#home');
+    home.remove();
+
 } else {
     const actionClass = document.querySelectorAll('.action');
     actionClass.forEach(element => element.remove());
