@@ -93,8 +93,7 @@ if (!tong) {
     brs.forEach(br => br.remove());
 }
 
-adjustTextarea();
-
+textArea.style.height = 'auto';
 textArea.addEventListener('input', adjustTextarea);
 window.addEventListener('resize', adjustTextarea);
 
