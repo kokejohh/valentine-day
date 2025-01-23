@@ -17,16 +17,8 @@
     <img id="cover" height="200px" alt="love">
 
     <form method="get" target="_blank" id="myForm">
-        <input class="animate__animated animate__bounceIn animate__fastest" autocomplete="off" type="text" name="f"
-            placeholder="I Love You">
-        <input class="animate__animated animate__bounceIn animate__faster" autocomplete="off" type="text" name="s"
-            placeholder="I Love You">
-        <input class="animate__animated animate__bounceIn animate__fast" autocomplete="off" type="text" name="t"
-            placeholder="I Love You">
-        <br>
-
-        <select autocomplete="off" class="action" name="i" id="selectGif">
-            <option value="1" selected="selected">1</option>
+        <select autocomplete="on" class="action" name="gif" id="selectGif">
+            <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -55,13 +47,12 @@
             <option value="27">27</option>
             <option value="28">28</option>
         </select>
-        <input class="action" id="minus" type="button" value="-">
-        <input class="action" id="plus" type="button" value="+">
         <br>
-        <input autocomplete="off" class="action" type="text" readonly id="link" value="Generate a link to share.">
+        <textarea autocomplete="on" class="animate__animated animate__bounceIn animate__faster" rows="1" name="f" id=""
+            placeholder="I Love You"></textarea>
         <br>
-        <input class="action" type="submit" name="gen" value="Generate link">
-        <input class="action" type="button" name="copy" value="Copy link">
+        <input class="action" type="submit" name="open" value="Result">
+        <input class="action" type="submit" name="copy" value="Get link">
     </form>
 
     <a href='./' id="home">Create your own!</a>

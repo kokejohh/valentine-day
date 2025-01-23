@@ -32,32 +32,16 @@ const imgData = {
 const selectGif = document.querySelector('#selectGif');
 const cover = document.querySelector('#cover');
 
-cover.src = imgData[selectGif.value];
+window.addEventListener('pageshow', e => {
+    if (!tong) cover.src = imgData[selectGif.value];
+});
+
 selectGif.addEventListener('change', e => {
-    setToGen();
-    const value = e.currentTarget?.value;
-    cover.src = imgData[value];
+    cover.src = imgData[selectGif.value];
 });
 
-const inputTxts = document.querySelectorAll('input[type=text]');
+const textArea = document.querySelector('textarea');
 const submitBtn = document.querySelector('input[type=submit');
-
-inputTxts.forEach((inputTxt, index) => {
-    if (index === 3) return;
-    inputTxt.addEventListener('input', setToGen);
-    inputTxt.addEventListener('propertychange', setToGen); 
-
-    if (index === 0) return;
-    inputTxt.disabled = true;
-    inputTxt.style.display = 'none';
-
-    inputTxt.addEventListener("animationend", () => {
-        if (inputTxt.classList.contains('animate__bounceOut')) {
-            inputTxt.disabled = true;
-            inputTxt.style.display = 'none';
-        }
-    });
-});
 
 const urlParams = new URLSearchParams(window.location.search);
 const tong = urlParams.get('tell')?.replaceAll(' ', '+');
@@ -71,62 +55,28 @@ if (!tong) {
         const form = e.target;
         const formData = new FormData(form);
         const formObj = Object.fromEntries(formData);
-        const formArray = Object.values(formObj).map(data => data.trim().replaceAll(',', '-'));
+        const formArray = Object.values(formObj).map(data => data.replaceAll(',', '-'));
         const formTxt = formArray.join(',');
 
         const compressed = LZString.compressToBase64(formTxt);
 
         const action = e.submitter.name;
-        if (action == 'gen') {
-            const link = document.querySelector('#link');
-            link.value = window.location.href + '?tell=' + compressed;
-
-            setToOpen();
-
-        } else if (action == 'open') {
+        if (action == 'open') {
             window.open('?tell=' + compressed, '_blank').focus();
+        } else if (action == 'copy') {
+            const copy = document.querySelector('input[name=copy]');
+            const { origin } = new URL(window.location.href);
+            navigator.clipboard.writeText(origin + '/?tell=' + compressed);
+            copy.value = 'Copied';
+            setTimeout(() => {
+                copy.value = 'Get link';
+            }, 500);
         } else {
             console.error('Not action!');
         }
     });
-
     const home = document.querySelector('#home');
     home.remove();
-
-    const plus = document.querySelector('#plus');
-    plus.addEventListener('click', async e => {
-        for (let i = 0; i < inputTxts.length - 1; i++) {
-            if (inputTxts[i].style.display !== '') {
-                inputTxts[i].style.display = '';
-                inputTxts[i].disabled = false;
-                inputTxts[i].classList.remove('animate__bounceOut');
-                setToGen();
-                return;
-            }
-        }
-    });
-
-    const minus = document.querySelector('#minus');
-    minus.addEventListener('click', e => {
-        for (let i = inputTxts.length - 2; i > 0; i--) {
-            if (inputTxts[i].style.display === '') {
-                inputTxts[i].classList.add('animate__bounceOut');
-                setToGen();
-                return;
-            }
-        }
-    });
-
-    const copy = document.querySelector('input[name=copy]');
-    copy.addEventListener('click', e => {
-        const link = document.querySelector('#link');
-        navigator.clipboard.writeText(link.value);
-
-        e.target.value = 'Copied';
-        setTimeout(() => {
-            e.target.value = 'Copy link';
-        }, 500);
-    });
 } else {
     const actionClass = document.querySelectorAll('.action');
     actionClass.forEach(element => element.remove());
@@ -134,34 +84,21 @@ if (!tong) {
     const decompressed = LZString.decompressFromBase64(tong);
     if (decompressed) {
         const message = decompressed.split(',');
-
-        for (let i = 0; i < message.length - 1; i++) {
-            inputTxts[i].value = message[i].trim() || inputTxts[i].placeholder;
-            inputTxts[i].disabled = true;
-            inputTxts[i].style.display = '';
-        }
-        cover.src = imgData[message[message.length - 1]];
+        textArea.value = message[1] || textArea.placeholder;
+        textArea.disabled = true;
+        cover.src = imgData[message[0]];
     }
+
+    const brs = document.querySelectorAll('br');
+    brs.forEach(br => br.remove());
 }
 
-function setToGen() {
-    if (submitBtn) {
-        submitBtn.name = 'gen';
-        submitBtn.value = 'Generate link';
-        setDefaultText();
-    }
-}
+adjustTextarea();
 
-function setToOpen() {
-    if (submitBtn) {
-        submitBtn.name = 'open';
-        submitBtn.value = 'Open link';
-    }
-}
+textArea.addEventListener('input', adjustTextarea);
+window.addEventListener('resize', adjustTextarea);
 
-function setDefaultText() {
-    const link = document.querySelector('#link');
-    if (link) {
-        link.value = 'Generate a link to share.';
-    }
+function adjustTextarea() {
+    textArea.style.height = 'auto';
+    textArea.style.height = textArea.scrollHeight + 'px';
 }
