@@ -33,6 +33,7 @@ const selectGif = document.querySelector('#selectGif');
 const cover = document.querySelector('#cover');
 
 window.addEventListener('pageshow', e => {
+    adjustTextarea();
     if (!tong) cover.src = imgData[selectGif.value];
 });
 
@@ -93,7 +94,6 @@ if (!tong) {
     brs.forEach(br => br.remove());
 }
 
-textArea.style.height = 'auto';
 textArea.addEventListener('input', adjustTextarea);
 window.addEventListener('resize', adjustTextarea);
 
