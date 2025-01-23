@@ -131,6 +131,7 @@ input[name=copy]:hover {
 
     textarea {
         width: 100%;
+        padding: 0.25rem 0.5rem;
     }
 
     input {
