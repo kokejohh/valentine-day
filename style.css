@@ -65,10 +65,11 @@ textarea {
     color: var(--pink-10);
     font-size: 100px;
     height: 200px;
+    width: 70px;
 }
 
 #increment:active, #decrement:active {
-    color: var(--pink-100);
+    font-size: 80px;
 }
 
 input[type=submit] {
@@ -103,6 +104,7 @@ input[name=copy]:hover {
 
 #cover {
     margin-bottom: 1rem;
+    object-fit: contain;
     pointer-events: none;
 }
 
@@ -164,5 +166,9 @@ input[name=copy]:hover {
     select {
         margin-bottom: 1rem;
         width: 30%;
+    }
+
+    #increment, #decrement {
+        width: 20%;
     }
 }
