@@ -42,7 +42,6 @@ selectGif.addEventListener('change', e => {
 });
 
 const textArea = document.querySelector('textarea');
-const submitBtn = document.querySelector('input[type=submit');
 
 const urlParams = new URLSearchParams(window.location.search);
 const tong = urlParams.get('tell')?.replaceAll(' ', '+');
@@ -85,7 +84,7 @@ if (!tong) {
     const decompressed = LZString.decompressFromBase64(tong);
     if (decompressed) {
         const message = decompressed.split(',');
-        textArea.value = message[1] || textArea.placeholder;
+        textArea.value = message[1] || 'I love you';
         textArea.disabled = true;
         cover.src = imgData[message[0]];
     }
