@@ -105,6 +105,9 @@ if (!tong) {
     const actionClass = document.querySelectorAll('.action');
     actionClass.forEach(element => element.remove());
 
+    const brs = document.querySelectorAll('br');
+    brs.forEach(br => br.remove());
+
     const decompressed = LZString.decompressFromBase64(tong);
     if (decompressed) {
         const message = decompressed.split(',');
@@ -113,8 +116,6 @@ if (!tong) {
         cover.src = imgData[message[0]];
     }
 
-    const brs = document.querySelectorAll('br');
-    brs.forEach(br => br.remove());
 }
 
 textArea.addEventListener('input', adjustTextarea);
@@ -124,31 +125,3 @@ function adjustTextarea() {
     textArea.style.height = 'auto';
     textArea.style.height = textArea.scrollHeight + 'px';
 }
-
-//animation falling down
-let skew = 1;
-
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-(function frame() {
-
-  skew = Math.max(0.8, skew - 0.001);
-
-  confetti({
-    particleCount: 1,
-    startVelocity: 0,
-    origin: {
-      x: Math.random(),
-      y: Math.random() * skew - 0.2,
-    },
-    colors: ["e7cdce", "eaa8ac", "e1848c", "d05d65"],
-    shapes: ["heart"],
-    gravity: randomInRange(0.4, 0.8),
-    scalar: randomInRange(0.4, 3),
-    drift: randomInRange(-0.4, 0.4),
-  });
-
-    requestAnimationFrame(frame);
-})();
