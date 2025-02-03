@@ -100,3 +100,37 @@ function adjustTextarea() {
     textArea.style.height = 'auto';
     textArea.style.height = textArea.scrollHeight + 'px';
 }
+
+//animation falling down
+const duration = 15 * 1000,
+  animationEnd = Date.now() + duration;
+
+let skew = 1;
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+(function frame() {
+  const timeLeft = animationEnd - Date.now(),
+    ticks = Math.max(200, 500 * (timeLeft / duration));
+
+  skew = Math.max(0.8, skew - 0.001);
+
+  confetti({
+    particleCount: 1,
+    startVelocity: 0,
+     ticks: ticks,
+    origin: {
+      x: Math.random(),
+      y: Math.random() * skew - 0.2,
+    },
+    colors: ["e7cdce", "eaa8ac", "e1848c", "d05d65", "c00645"],
+    shapes: ["heart"],
+    gravity: randomInRange(0.4, 1),
+    scalar: randomInRange(0.4, 3),
+    drift: randomInRange(-0.4, 0.4),
+  });
+
+    requestAnimationFrame(frame);
+})();
