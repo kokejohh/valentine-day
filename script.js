@@ -37,16 +37,40 @@ window.addEventListener('pageshow', e => {
     if (!tong) cover.src = imgData[selectGif.value];
 });
 
-selectGif.addEventListener('change', e => {
-    cover.src = imgData[selectGif.value];
-});
-
 const textArea = document.querySelector('textarea');
 
 const urlParams = new URLSearchParams(window.location.search);
 const tong = urlParams.get('tell')?.replaceAll(' ', '+');
 
 if (!tong) {
+    const loader = document.querySelector('.loader');
+
+    const decrement = document.querySelector('#decrement');
+    const increment = document.querySelector('#increment');
+
+    const maxImage = Object.keys(imgData).length;
+    decrement.addEventListener('click', () => {
+        if (selectGif.value <= 1) selectGif.value = maxImage;
+        else selectGif.value--;
+        cover.src = imgData[selectGif.value];
+
+        cover.style.display = 'none';
+        loader.style.display = 'inline';
+    });
+    increment.addEventListener('click', () => {
+        if (selectGif.value >= maxImage) selectGif.value = 1;
+        else selectGif.value++;
+        cover.src = imgData[selectGif.value];
+
+        cover.style.display = 'none';
+        loader.style.display = 'inline';
+    });
+
+    cover.addEventListener('load', () => {
+        cover.style.display = 'inline';
+        loader.style.display = 'none';
+    });
+
     const myForm = document.querySelector('#myForm');
 
     myForm.addEventListener('submit', e => {
@@ -102,9 +126,6 @@ function adjustTextarea() {
 }
 
 //animation falling down
-const duration = 15 * 1000,
-  animationEnd = Date.now() + duration;
-
 let skew = 1;
 
 function randomInRange(min, max) {
@@ -112,22 +133,19 @@ function randomInRange(min, max) {
 }
 
 (function frame() {
-  const timeLeft = animationEnd - Date.now(),
-    ticks = Math.max(200, 500 * (timeLeft / duration));
 
   skew = Math.max(0.8, skew - 0.001);
 
   confetti({
     particleCount: 1,
     startVelocity: 0,
-     ticks: ticks,
     origin: {
       x: Math.random(),
       y: Math.random() * skew - 0.2,
     },
-    colors: ["e7cdce", "eaa8ac", "e1848c", "d05d65", "c00645"],
+    colors: ["e7cdce", "eaa8ac", "e1848c", "d05d65"],
     shapes: ["heart"],
-    gravity: randomInRange(0.4, 1),
+    gravity: randomInRange(0.4, 0.8),
     scalar: randomInRange(0.4, 3),
     drift: randomInRange(-0.4, 0.4),
   });

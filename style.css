@@ -59,18 +59,16 @@ textarea {
     width: 30%;
 }
 
-select {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    width: 15%;
-    height: 3rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23c00645" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E');
-    background-repeat: no-repeat;
-    background-position: right 5px center;
-    background-size: 1.5rem;
+#increment, #decrement {
+    background-color: rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
+    color: var(--pink-10);
+    font-size: 100px;
+    height: 200px;
+}
+
+#increment:active, #decrement:active {
+    color: var(--pink-100);
 }
 
 input[type=submit] {
@@ -122,6 +120,27 @@ input[name=copy]:hover {
 
 #home:hover {
     color: var(--pink-100);
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid var(--pink-100);
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 0.5s linear infinite; /* Safari */
+  animation: spin 0.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media screen and (max-width: 768px) {
