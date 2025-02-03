@@ -65,8 +65,8 @@ if (!tong) {
             window.open('?tell=' + compressed, '_blank').focus();
         } else if (action == 'copy') {
             const copy = document.querySelector('input[name=copy]');
-            const { origin } = new URL(window.location.href);
-            navigator.clipboard.writeText(origin + '/?tell=' + compressed);
+            const { origin, pathname } = new URL(window.location.href);
+            navigator.clipboard.writeText(origin + pathname + '?tell=' + compressed);
             copy.value = 'Copied';
             setTimeout(() => {
                 copy.value = 'Get link';
