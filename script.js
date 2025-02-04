@@ -49,20 +49,10 @@ const imgData = {
 
 const selectGif = document.querySelector('#selectGif');
 const cover = document.querySelector('#cover');
-
-window.addEventListener('pageshow', e => {
-    adjustTextarea();
-    if (!tong) cover.src = imgData[selectGif.value];
-});
-
 const textArea = document.querySelector('textarea');
-
-const urlParams = new URLSearchParams(window.location.search);
-const tong = urlParams.get('tell')?.replaceAll(' ', '+');
 
 if (!tong) {
     const loader = document.querySelector('.loader');
-
     const decrement = document.querySelector('#decrement');
     const increment = document.querySelector('#increment');
 
@@ -90,7 +80,6 @@ if (!tong) {
     });
 
     const myForm = document.querySelector('#myForm');
-
     myForm.addEventListener('submit', e => {
         e.preventDefault();
 
@@ -117,15 +106,7 @@ if (!tong) {
             console.error('Not action!');
         }
     });
-    const home = document.querySelector('#home');
-    home.remove();
 } else {
-    const actionClass = document.querySelectorAll('.action');
-    actionClass.forEach(element => element.remove());
-
-    const brs = document.querySelectorAll('br');
-    brs.forEach(br => br.remove());
-
     const decompressed = LZString.decompressFromBase64(tong);
     if (decompressed) {
         const message = decompressed.split(',');
@@ -134,6 +115,11 @@ if (!tong) {
         cover.src = imgData[message[0]];
     }
 }
+
+window.addEventListener('pageshow', e => {
+    adjustTextarea();
+    if (!tong) cover.src = imgData[selectGif.value];
+});
 
 textArea.addEventListener('input', adjustTextarea);
 window.addEventListener('resize', adjustTextarea);
