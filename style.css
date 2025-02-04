@@ -54,9 +54,8 @@ textarea {
     cursor: text;
     font-size: 2rem;
     resize: none;
-    padding: 0.25rem 2rem;
     overflow: hidden;
-    width: 30%;
+    width: 35%;
 }
 
 input[type=submit] {
