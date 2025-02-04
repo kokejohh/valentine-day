@@ -62,8 +62,13 @@ window.addEventListener('resize', adjustTextarea);
 const urlParams = new URLSearchParams(window.location.search);
 const tong = urlParams.get('tell')?.replaceAll(' ', '+');
 
+const loader = document.querySelector('.loader');
+cover.addEventListener('load', () => {
+    cover.style.display = 'inline';
+    loader.style.display = 'none';
+});
+
 if (!tong) {
-    const loader = document.querySelector('.loader');
     const decrement = document.querySelector('#decrement');
     const increment = document.querySelector('#increment');
 
@@ -85,10 +90,6 @@ if (!tong) {
         loader.style.display = 'inline';
     });
 
-    cover.addEventListener('load', () => {
-        cover.style.display = 'inline';
-        loader.style.display = 'none';
-    });
 
     const myForm = document.querySelector('#myForm');
     myForm.addEventListener('submit', e => {
