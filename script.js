@@ -115,7 +115,6 @@ if (!tong) {
         textArea.disabled = true;
         cover.src = imgData[message[0]];
     }
-
 }
 
 textArea.addEventListener('input', adjustTextarea);

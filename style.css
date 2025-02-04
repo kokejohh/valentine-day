@@ -27,18 +27,18 @@ body {
   padding-bottom: 2rem;
 }
 
+form {
+    text-align: center;
+    width: 80%;
+}
+
 h1 {
   font-size: 5rem;
   color: var(--pink-10);
   word-break: keep-all;
 }
 
-form {
-    text-align: center;
-    width: 80%;
-}
-
-input, select, textarea {
+input, textarea {
     background-color: var(--pink-10);
     border-radius: 1.5rem;
     color: var(--pink-100);
@@ -57,19 +57,6 @@ textarea {
     padding: 0.25rem 2rem;
     overflow: hidden;
     width: 30%;
-}
-
-#increment, #decrement {
-    background-color: rgba(0,0,0,0);
-    border-color: rgba(0,0,0,0);
-    color: var(--pink-10);
-    font-size: 100px;
-    height: 200px;
-    width: 70px;
-}
-
-#increment:active, #decrement:active {
-    font-size: 80px;
 }
 
 input[type=submit] {
@@ -122,6 +109,19 @@ input[name=copy]:hover {
 
 #home:hover {
     color: var(--pink-100);
+}
+
+#increment, #decrement {
+    background-color: rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
+    color: var(--pink-10);
+    font-size: 100px;
+    height: 200px;
+    width: 70px;
+}
+
+#increment:active, #decrement:active {
+    font-size: 80px;
 }
 
 .loader {
