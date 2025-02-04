@@ -51,6 +51,17 @@ const selectGif = document.querySelector('#selectGif');
 const cover = document.querySelector('#cover');
 const textArea = document.querySelector('textarea');
 
+window.addEventListener('pageshow', e => {
+    adjustTextarea();
+    if (!tong) cover.src = imgData[selectGif.value];
+});
+
+textArea.addEventListener('input', adjustTextarea);
+window.addEventListener('resize', adjustTextarea);
+
+const urlParams = new URLSearchParams(window.location.search);
+const tong = urlParams.get('tell')?.replaceAll(' ', '+');
+
 if (!tong) {
     const loader = document.querySelector('.loader');
     const decrement = document.querySelector('#decrement');
@@ -106,7 +117,14 @@ if (!tong) {
             console.error('Not action!');
         }
     });
+    const home = document.querySelector('#home');
+    home.remove();
 } else {
+    const actionClass = document.querySelectorAll('.action');
+    actionClass.forEach(element => element.remove());
+
+    const brs = document.querySelectorAll('br');
+    brs.forEach(br => br.remove());
     const decompressed = LZString.decompressFromBase64(tong);
     if (decompressed) {
         const message = decompressed.split(',');
@@ -116,13 +134,7 @@ if (!tong) {
     }
 }
 
-window.addEventListener('pageshow', e => {
-    adjustTextarea();
-    if (!tong) cover.src = imgData[selectGif.value];
-});
-
-textArea.addEventListener('input', adjustTextarea);
-window.addEventListener('resize', adjustTextarea);
+myForm.style.visibility = '';
 
 function adjustTextarea() {
     textArea.style.height = 'auto';
