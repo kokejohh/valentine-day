@@ -4,10 +4,10 @@ const imgData = {
     2: 'https://media.tenor.com/s4ijU4nUxEUAAAAj/peach-goma.gif',
     3: 'https://media.tenor.com/AQ8I3RASlLcAAAAj/mochi-love-you.gif',
     4: 'https://media.tenor.com/OYyi9RiocJMAAAAj/cute.gif',
-    5: 'https://media.tenor.com/kWlwZ9Hy6TAAAAAj/peach-goma-goma.gif',
+    5: 'https://media.tenor.com/L0pNsP12XHYAAAAj/khofar-me-and-melissa.gif',
     6: 'https://media.tenor.com/S9DsS00RdGkAAAAj/peach-goma.gif',
     7: 'https://media.tenor.com/PxdfxnHoxAAAAAAj/peach-goma.gif',
-    8: 'https://media.tenor.com/dBuCk1xnXj8AAAAj/peach-and-goma-love-lift-up.gif',
+    8: 'https://media.tenor.com/EjH1sk7bSv4AAAAj/peach-goma-hearts-bucket.gif',
     9: 'https://media.tenor.com/A6cT9DU8u6EAAAAj/peach-and-goma-goma.gif',
     10: 'https://media.tenor.com/s0UUW0sKVFoAAAAj/tkthao219-peach.gif',
     11: 'https://media.tenor.com/SiqVtvrB0PwAAAAj/mochi-cat.gif',
@@ -39,12 +39,9 @@ const imgData = {
     37: 'https://media.tenor.com/PzbxypI4VSAAAAAj/cat.gif',
     38: 'https://media.tenor.com/mfmIXiRnJOkAAAAj/peach-and-goma-peach-goma.gif',
     39: 'https://media.tenor.com/KTx1WW-lmfUAAAAj/peach-and-goma-peach-goma.gif',
-    40: 'https://media.tenor.com/4hgpytd5UAYAAAAj/peach-goma-waving.gif',
-    41: 'https://media.tenor.com/eMd6i40gETcAAAAj/peach-cat-sad-peach-cry.gif',
-    42: 'https://media.tenor.com/BEBopBnhjVEAAAAj/peach-and-goma-peach-goma.gif',
-    43: 'https://media.tenor.com/cVpgryPSNwUAAAAj/peach-goma.gif',
-    44: 'https://media.tenor.com/EjH1sk7bSv4AAAAj/peach-goma-hearts-bucket.gif',
-    45: 'https://media.tenor.com/L0pNsP12XHYAAAAj/khofar-me-and-melissa.gif'
+    40: 'https://media.tenor.com/eMd6i40gETcAAAAj/peach-cat-sad-peach-cry.gif',
+    41: 'https://media.tenor.com/BEBopBnhjVEAAAAj/peach-and-goma-peach-goma.gif',
+    42: 'https://media.tenor.com/cVpgryPSNwUAAAAj/peach-goma.gif',
 }
 
 const selectGif = document.querySelector('#selectGif');
